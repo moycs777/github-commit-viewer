@@ -2,6 +2,7 @@
 
 This repo contains 2 projects front and api.
 
+Make sure you have available ports: 3000(front) and 10000(api)
 ```bash
 front
 ```
