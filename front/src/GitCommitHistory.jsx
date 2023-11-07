@@ -1,53 +1,53 @@
-import React, { useState } from "react";
-import MoonLoader from "react-spinners/MoonLoader";
-import { CommitsTable } from "./components/commits-table";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
+import React, { useState } from 'react'
+import MoonLoader from 'react-spinners/MoonLoader'
+import { CommitsTable } from './components/commits-table'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
 
 export const GitCommitHistory = () => {
-    const [username, setUsername] = useState("moycs777");
-    const [repository, setRepository] = useState("github-commit-viewer");
-    const [commits, setCommits] = useState([]);
-    const [isSearching, setIsSearching] = useState(false);
+    const [username, setUsername] = useState('moycs777')
+    const [repository, setRepository] = useState('github-commit-viewer')
+    const [commits, setCommits] = useState([])
+    const [isSearching, setIsSearching] = useState(false)
 
     const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-    };
+        setUsername(e.target.value)
+    }
 
     const handleRepositoryChange = (e) => {
-        setRepository(e.target.value);
-    };
+        setRepository(e.target.value)
+    }
 
     const fetchCommits = async () => {
-        setIsSearching(true);
+        setIsSearching(true)
 
-        if (username === "" || repository === "") {
-            setIsSearching(false);
-            return toast.error("All fields are required.");
+        if (username === '' || repository === '') {
+            setIsSearching(false)
+            return toast.error('All fields are required.')
         }
         try {
             const response = await fetch(
                 `http://localhost:10000/github/commits/$\{username}/$\{repository}`
-        );
+            )
 
             if (response.ok) {
-                const data = await response.json();
-                setCommits(data);
-                setIsSearching(false);
-                toast.success("History loaded");
-                console.log(data.private);
+                const data = await response.json()
+                setCommits(data)
+                setIsSearching(false)
+                toast.success('History loaded')
+                console.log(data.private)
             } else {
-                setIsSearching(false);
+                setIsSearching(false)
                 toast.error(
-                    "Unable to get history commits. Remeber, the repository should be public"
-                );
-                throw new Error("Unable to get history commits.");
+                    'Unable to get history commits. Remeber, the repository should be public'
+                )
+                throw new Error('Unable to get history commits.')
             }
         } catch (error) {
-            console.error("Error obtaining commits:", error);
+            console.error('Error obtaining commits:', error)
         }
-    };
+    }
 
     return (
         <div className="w-full pb-4">
@@ -103,5 +103,5 @@ export const GitCommitHistory = () => {
                 <CommitsTable datos={commits} />
             </div>
         </div>
-    );
-};
+    )
+}
