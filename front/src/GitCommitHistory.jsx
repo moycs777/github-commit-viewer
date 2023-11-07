@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 export const GitCommitHistory = () => {
-    const [username, setUsername] = useState("");
-    const [repository, setRepository] = useState("");
+    const [username, setUsername] = useState("moycs777");
+    const [repository, setRepository] = useState("github-commit-viewer");
     const [commits, setCommits] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
 
@@ -24,7 +24,7 @@ export const GitCommitHistory = () => {
 
         if (username === "" || repository === "") {
             setIsSearching(false);
-            return toast.error("Debes llenar los campos vacios");
+            return toast.error("All fields are required.");
         }
         try {
             const response = await fetch(
@@ -35,17 +35,17 @@ export const GitCommitHistory = () => {
                 const data = await response.json();
                 setCommits(data);
                 setIsSearching(false);
-                toast.success("Historial de commits cargado");
+                toast.success("History loaded");
                 console.log(data.private);
             } else {
                 setIsSearching(false);
                 toast.error(
-                    "No se pudo obtener el historial de commits. Recuerde que solo puede ingresar un repositorio publico"
+                    "Unable to get history commits. Remeber, the repository should be public"
                 );
-                throw new Error("No se pudo obtener el historial de commits.");
+                throw new Error("Unable to get history commits.");
             }
         } catch (error) {
-            console.error("Error al obtener el historial de commits:", error);
+            console.error("Error obtaining commits:", error);
         }
     };
 
@@ -93,7 +93,7 @@ export const GitCommitHistory = () => {
                         {isSearching ? (
                             <MoonLoader size={20} color="#000000" />
                         ) : (
-                            <span className="font-semibold">Obtener Commits</span>
+                            <span className="font-semibold">Get Commits</span>
                         )}
                     </button>
                 </div>
