@@ -38,3 +38,8 @@ cd api && npm i
 ```bash
  npm run start
 ```
+
+If you like you could run test inside each project terminal with the command:
+```bash
+ npm run test
+```
