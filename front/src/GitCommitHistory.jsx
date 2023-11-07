@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
-import { Table } from "./components/commits-table";
+import { CommitsTable } from "./components/commits-table";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -100,7 +100,7 @@ export const GitCommitHistory = () => {
             </div>
 
             <div className="md:w-full overflow-x-auto py-2 flex md:justify-center px-3 md:px-8">
-                <Table datos={commits} />
+                <CommitsTable datos={commits} />
             </div>
         </div>
     );
