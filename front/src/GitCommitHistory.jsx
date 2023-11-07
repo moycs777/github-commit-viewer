@@ -28,7 +28,7 @@ export const GitCommitHistory = () => {
         }
         try {
             const response = await fetch(
-                `http://localhost:10000/github/commits/$\{username}/$\{repository}`
+                `http://localhost:10000/github/commits/${username}/${repository}`
             )
 
             if (response.ok) {
