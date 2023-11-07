@@ -5,8 +5,7 @@ export async function fetchCommits(username, repository) {
         )
 
         if (response.ok) {
-            const data = await response.json()
-            return data
+            return await response.json()
         } else {
             throw new Error('Unable to get history commits.')
         }

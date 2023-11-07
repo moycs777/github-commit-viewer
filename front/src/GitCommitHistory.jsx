@@ -34,7 +34,6 @@ export const GitCommitHistory = () => {
             setCommits(data)
             setIsSearching(false)
             toast.success('History loaded')
-            console.log(data.private)
         } catch (error) {
             setIsSearching(false)
             toast.error(
