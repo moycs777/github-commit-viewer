@@ -1,5 +1,8 @@
 # Fulltime Force Test
 
+First clone the repo or download it after that 
+open a terminal in the project folder
+
 This repo contains 2 projects front and api.
 
 Make sure you have available ports: 3000(front) and 10000(api)
@@ -9,7 +12,6 @@ front
 
 ## Installation
 
-open a terminal
 ```bash
 cd front && npm i
 ```
@@ -27,7 +29,7 @@ It should open in your default browser the front-end client
 ```bash
 api
 ```
-Now open another terminal.
+Now open another terminal in the location of the cloned/downloaded project.
 
 ```bash
 cd api && npm i

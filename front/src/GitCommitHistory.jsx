@@ -4,6 +4,7 @@ import { CommitsTable } from './components/commits-table'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
+import { fetchCommits } from './services/githubService'
 
 export const GitCommitHistory = () => {
     const [username, setUsername] = useState('moycs777')
@@ -19,32 +20,26 @@ export const GitCommitHistory = () => {
         setRepository(e.target.value)
     }
 
-    const fetchCommits = async () => {
+    const fetchAll = async () => {
         setIsSearching(true)
 
         if (username === '' || repository === '') {
             setIsSearching(false)
             return toast.error('All fields are required.')
         }
-        try {
-            const response = await fetch(
-                `http://localhost:10000/github/commits/${username}/${repository}`
-            )
 
-            if (response.ok) {
-                const data = await response.json()
-                setCommits(data)
-                setIsSearching(false)
-                toast.success('History loaded')
-                console.log(data.private)
-            } else {
-                setIsSearching(false)
-                toast.error(
-                    'Unable to get history commits. Remeber, the repository should be public'
-                )
-                throw new Error('Unable to get history commits.')
-            }
+        try {
+            const data = await fetchCommits(username, repository) // Call the service function
+
+            setCommits(data)
+            setIsSearching(false)
+            toast.success('History loaded')
+            console.log(data.private)
         } catch (error) {
+            setIsSearching(false)
+            toast.error(
+                'Unable to get history commits. Remember, the repository should be public'
+            )
             console.error('Error obtaining commits:', error)
         }
     }
@@ -86,7 +81,7 @@ export const GitCommitHistory = () => {
                     </div>
 
                     <button
-                        onClick={fetchCommits}
+                        onClick={fetchAll}
                         className="bg-blue-300 hover:bg-blue-400 flex justify-center w-fit px-2 py-1 mt-2"
                         disabled={isSearching}
                     >
