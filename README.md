@@ -19,7 +19,7 @@ cd front && npm i
 ## Usage
 
 ```bash
- npm start
+ npm run start
 ```
 
 It should open in your default browser the front-end client
